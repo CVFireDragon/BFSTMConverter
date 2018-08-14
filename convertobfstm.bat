@@ -1,9 +1,6 @@
 @echo off
-echo Please select the format. (bfstm, bfwav)
-set /p format=
-echo Now select the .wav file to convert, or drag it in to this window.
-set /p wav=
-
-waveconverter --format %format% --encoding adpcm %wav%
-
-pause
+cd /d "%~dp0"
+vgmstream -l 1 -f 0 -L -o "%~n1.lwav" "%~1"
+move "%~n1.lwav" "."
+vgaudio --little-endian "%~n1.lwav" "%~n1.bfstm"
+del "%~n1.lwav"
